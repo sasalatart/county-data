@@ -5,6 +5,7 @@
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^7.0.0",
+    "nodemon": "^1.11.0",
     "react-scripts": "0.9.5"
   },
   "dependencies": {
