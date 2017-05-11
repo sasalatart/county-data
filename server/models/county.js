@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
 const basicSchema = new mongoose.Schema({
   year: Number,
@@ -61,5 +62,7 @@ const CountySchema = new mongoose.Schema({
   obesityPrevalence: [basicSchema],
   obesityPrevalenceBySex: [basicSchemaBySex]
 });
+
+CountySchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('County', CountySchema);
