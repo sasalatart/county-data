@@ -8,4 +8,10 @@ router.get('/', (req, res, next) => {
   }).catch(next);
 });
 
+router.get('/:id', (req, res, next) => {
+  County.findOne({ _id: req.params.id }).then(county => {
+    res.status(200).json({ county });
+  }).catch(next);
+});
+
 module.exports = router;
