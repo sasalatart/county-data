@@ -14,4 +14,11 @@ router.get('/:id', (req, res, next) => {
   }).catch(next);
 });
 
+router.get('/search/:name', (req, res, next) => {
+  const regExp = new RegExp(`.*${req.params.name}.*`, 'i');
+  County.find({ name: regExp }, 'state fipsCode name').then(counties => {
+    res.status(200).json({ counties });
+  }).catch(next);
+});
+
 module.exports = router;
