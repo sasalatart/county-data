@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "node server/index.js",
+    "seed": "node server/db/seeds.js",
     "startFront": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
