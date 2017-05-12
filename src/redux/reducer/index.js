@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import watching from './watching';
+import countiesIndex from './countiesIndex';
 
 export default combineReducers({
-  watching
+  countiesIndex
 });

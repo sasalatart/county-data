@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Nav, NavItem } from 'react-bootstrap';
-import { changeWatching } from '../redux/actions';
-import { watchingValues } from '../redux/reducer/watching';
+import { changeWatching } from '../../redux/actions';
+import { watchingValues } from '../../redux/reducer/countiesIndex';
 
 class CountiesIndexTabs extends Component {
   handleSelect(eventKey) {
@@ -21,9 +21,9 @@ class CountiesIndexTabs extends Component {
   }
 }
 
-const mapState = ({ watching }) => {
+const mapState = ({ countiesIndex }) => {
   return {
-    selected: watching.selected
+    selected: countiesIndex.selected
   };
 };
 const mapDispatch = { changeWatching };

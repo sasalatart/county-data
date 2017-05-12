@@ -1,1 +1,4 @@
-export { changeWatching } from './watching';
+export {
+  changeWatching,
+  setPage
+} from './countiesIndex';

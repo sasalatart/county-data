@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CountiesIndexTabs from './CountiesIndexTabs';
+import CountiesIndex from './CountiesIndex';
 
 class App extends Component {
   render() {
@@ -8,7 +8,7 @@ class App extends Component {
         <h1>County Data App</h1>
         <div className="row">
           <div className="col-sm-4">
-            <CountiesIndexTabs />
+            <CountiesIndex />
           </div>
         </div>
       </div>
