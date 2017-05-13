@@ -1,13 +1,19 @@
-export const watchingValues = { all: 'all', fav: 'favourites' };
+export const watchingValues = { all: 'all', fav: 'favourites', search: 'search' };
 export const CHANGE_WATCHING = 'CHANGE_WATCHING';
 export const SET_PAGE = 'SET_PAGE';
 export const SET_PAGE_COUNTIES = 'SET_PAGE_COUNTIES';
+export const SET_SEARCH_PAGE = 'SET_SEARCH_PAGE';
+export const SET_SEARCH_PAGE_COUNTIES = 'SET_SEARCH_PAGE_COUNTIES';
+export const CLEAR_COUNTY_SEARCH = 'CLEAR_COUNTY_SEARCH';
 
 const initialState = {
   selected: watchingValues.all,
-  pageCounties: null,
+  pageCounties: [],
   pages: null,
-  currentPage: 1
+  currentPage: 1,
+  pageCountiesFromSearch: [],
+  pagesFromSearch: null,
+  currentPageFromSearch: 1
 };
 
 export default function reducer(state = initialState, action) {
@@ -32,10 +38,31 @@ export default function reducer(state = initialState, action) {
         pageCounties: action.pageCounties
       }
     }
-    default: {
+    case SET_SEARCH_PAGE: {
       return {
-        ...state
+        ...state,
+        searchPage: action.searchPage
       };
+    }
+    case SET_SEARCH_PAGE_COUNTIES: {
+      return {
+        ...state,
+        currentPageFromSearch: action.currentPageFromSearch,
+        pagesFromSearch: action.pagesFromSearch,
+        pageCountiesFromSearch: action.pageCountiesFromSearch
+      }
+    }
+    case CLEAR_COUNTY_SEARCH: {
+      return {
+        ...state,
+        selected: watchingValues.all,
+        currentPageFromSearch: 1,
+        pagesFromSearch: null,
+        pageCountiesFromSearch: []
+      };
+    }
+    default: {
+      return { ...state };
     }
   }
 }

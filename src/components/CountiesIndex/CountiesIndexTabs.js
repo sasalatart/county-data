@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Nav, NavItem } from 'react-bootstrap';
-import { changeWatching } from '../../redux/actions';
 import { watchingValues } from '../../redux/reducer/countiesIndex';
 
 class CountiesIndexTabs extends Component {
@@ -16,16 +14,15 @@ class CountiesIndexTabs extends Component {
         onSelect={this.handleSelect.bind(this)}>
         <NavItem eventKey={watchingValues.all}>Todos</NavItem>
         <NavItem eventKey={watchingValues.fav}>Favoritos</NavItem>
+
+        <NavItem
+          eventKey={watchingValues.search}
+          disabled={this.props.pageCountiesFromSearch.length === 0}>
+          Búsqueda
+        </NavItem>
       </Nav>
     );
   }
 }
 
-const mapState = ({ countiesIndex }) => {
-  return {
-    selected: countiesIndex.selected
-  };
-};
-const mapDispatch = { changeWatching };
-
-export default connect(mapState, mapDispatch)(CountiesIndexTabs);
+export default CountiesIndexTabs;

@@ -1,27 +1,66 @@
-import React from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { ListGroup } from 'react-bootstrap';
 import CountiesPaginator from './CountiesPaginator';
+import { fetchAllCounties, searchByName } from '../../redux/actions';
+import { watchingValues } from '../../redux/reducer/countiesIndex';
+import {
+  buildGroupItems,
+  getCurrentSearchName,
+  parseWatchingAllValues,
+  parseWatchingSearchValues
+} from '../../utils';
 
-const CountiesList = ({ counties }) => {
-  const countiesListGroup = counties.map(county => {
+class CountiesList extends Component {
+  properDisplay() {
+    switch (this.props.selected) {
+      case watchingValues.all: {
+        return parseWatchingAllValues(this.props);
+      }
+      case watchingValues.search: {
+        return parseWatchingSearchValues(this.props);
+      }
+      default: {
+        parseWatchingAllValues(this.props);
+      }
+    }
+  }
+
+  render() {
+    const display = this.properDisplay();
+
     return(
-      <ListGroupItem
-        key={county._id}
-        header={county.name}
-        onClick={() => console.log(county._id)}>
-
-        {county.state}
-      </ListGroupItem>
+      <div>
+        <CountiesPaginator { ...display } />
+        <ListGroup>{ buildGroupItems(display.counties) }</ListGroup>
+        <CountiesPaginator { ...display } />
+      </div>
     );
-  });
+  }
+}
 
-  return(
-    <div>
-      <CountiesPaginator />
-      <ListGroup>{ countiesListGroup }</ListGroup>
-      <CountiesPaginator />
-    </div>
-  );
+const mapState = ({
+  countiesIndex: {
+    selected,
+    currentPage,
+    pages,
+    pageCounties,
+    currentPageFromSearch,
+    pagesFromSearch,
+    pageCountiesFromSearch
+  },
+  form }) => {
+  return {
+    selected,
+    currentPage,
+    pages,
+    pageCounties,
+    currentPageFromSearch,
+    pagesFromSearch,
+    pageCountiesFromSearch,
+    searchName: getCurrentSearchName(form)
+  };
 };
+const mapDispatch = ({ fetchAllCounties, searchByName });
 
-export default CountiesList;
+export default connect(mapState, mapDispatch)(CountiesList);

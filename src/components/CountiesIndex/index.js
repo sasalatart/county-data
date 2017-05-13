@@ -1,39 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setPage } from '../../redux/actions';
-import CountiesList from './CountiesList';
+import { changeWatching, fetchAllCounties } from '../../redux/actions';
 import CountiesIndexTabs from './CountiesIndexTabs';
+import CountiesList from './CountiesList';
 
 class CountiesIndex extends Component {
   componentDidMount() {
     if (!this.props.pageCounties) {
-      this.props.setPage(1);
+      this.props.fetchAllCounties(1);
     }
   }
 
   render() {
     return (
       <div>
-        <CountiesIndexTabs />
-        {
-          this.props.pageCounties &&
-          <CountiesList
-            counties={this.props.pageCounties}
-            onCountyClick={() => console.log('clicked')} />
-        }
+        <CountiesIndexTabs
+          selected={this.props.selected}
+          changeWatching={this.props.changeWatching}
+          pageCountiesFromSearch={this.props.pageCountiesFromSearch} />
+
+        <CountiesList
+          onCountyClick={() => console.log('clicked')} />
       </div>
     );
   }
 }
 
-const mapState = ({ countiesIndex }) => {
-  return {
-    currentPage: countiesIndex.currentPage,
-    pages: countiesIndex.pages,
-    pageCounties: countiesIndex.pageCounties
-  };
+const mapState = ({ countiesIndex: { selected, pageCountiesFromSearch } }) => {
+  return { selected, pageCountiesFromSearch };
 };
-
-const mapDispatch = { setPage };
+const mapDispatch = { changeWatching, fetchAllCounties };
 
 export default connect(mapState, mapDispatch)(CountiesIndex);

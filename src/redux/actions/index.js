@@ -1,4 +1,6 @@
 export {
   changeWatching,
-  setPage
+  fetchAllCounties,
+  searchByName,
+  clearCountySearch
 } from './countiesIndex';

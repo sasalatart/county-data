@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import { Row, Col } from 'react-bootstrap';
 import CountiesIndex from './CountiesIndex';
+import Navbar from './Navbar';
 
 class App extends Component {
   render() {
     return (
-      <div className="container">
-        <h1>County Data App</h1>
-        <div className="row">
-          <div className="col-sm-4">
-            <CountiesIndex />
-          </div>
+      <div>
+        <Navbar />
+        <div className="container">
+          <Row><Col sm={4}><CountiesIndex /></Col></Row>
         </div>
       </div>
     );

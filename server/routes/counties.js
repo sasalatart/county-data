@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const County = require('../models/county');
+const paginateParams = require('../utils').countyPaginateParams;
 
 router.get('/', (req, res, next) => {
-  const options = { page: req.query.page, limit: 25, select: 'state fipsCode name' };
-  County.paginate({}, options).then(counties => {
+  County.paginate({}, paginateParams(req.query.page)).then(counties => {
     res.status(200).json({ counties });
   }).catch(next);
 });
@@ -16,7 +16,7 @@ router.get('/:id', (req, res, next) => {
 
 router.get('/search/:name', (req, res, next) => {
   const regExp = new RegExp(`.*${req.params.name}.*`, 'i');
-  County.find({ name: regExp }, 'state fipsCode name').then(counties => {
+  County.paginate({ name: regExp }, paginateParams(req.query.page)).then(counties => {
     res.status(200).json({ counties });
   }).catch(next);
 });
