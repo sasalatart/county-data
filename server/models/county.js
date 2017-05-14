@@ -54,13 +54,15 @@ const CountySchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  diagnosedDiabetesPrevalence: [basicSchema],
-  diagnosedDiabetesPrevalenceBySex: [basicSchemaBySex],
-  diagnosedDiabetesIncidence: [diagnosedDiabetesIncidence],
-  leisureTimePhysicalInactivityPrevalence: [basicSchema],
-  leisureTimePhysicalInactivityPrevalenceBySex: [basicSchemaBySex],
-  obesityPrevalence: [basicSchema],
-  obesityPrevalenceBySex: [basicSchemaBySex]
+  statistics: {
+    diagnosedDiabetesPrevalence: [basicSchema],
+    diagnosedDiabetesPrevalenceBySex: [basicSchemaBySex],
+    diagnosedDiabetesIncidence: [diagnosedDiabetesIncidence],
+    leisureTimePhysicalInactivityPrevalence: [basicSchema],
+    leisureTimePhysicalInactivityPrevalenceBySex: [basicSchemaBySex],
+    obesityPrevalence: [basicSchema],
+    obesityPrevalenceBySex: [basicSchemaBySex]
+  }
 });
 
 CountySchema.plugin(mongoosePaginate);
