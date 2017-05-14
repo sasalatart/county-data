@@ -3,61 +3,40 @@ import { connect } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
 import CountiesPaginator from './CountiesPaginator';
 import { fetchAllCounties, searchByName } from '../../redux/actions';
-import { watchingValues } from '../../redux/reducer/countiesIndex';
-import {
-  buildGroupItems,
-  getCurrentSearchName,
-  parseWatchingAllValues,
-  parseWatchingSearchValues
-} from '../../utils';
+import { watchingValues } from '../../redux/reducer/allCounties';
+import { buildGroupItems, getCurrentSearchName } from '../../utils';
 
 class CountiesList extends Component {
   properDisplay() {
-    switch (this.props.selected) {
-      case watchingValues.all: {
-        return parseWatchingAllValues(this.props);
-      }
-      case watchingValues.search: {
-        return parseWatchingSearchValues(this.props);
-      }
-      default: {
-        parseWatchingAllValues(this.props);
-      }
-    }
+    const allCounties = {
+      ...this.props.allCounties,
+      fetchFunction: this.props.fetchAllCounties
+    };
+
+    const search = {
+      ...this.props.search,
+      fetchFunction: this.props.searchByName,
+      countyName: this.props.searchName
+    };
+
+    return allCounties.selected === watchingValues.all ? allCounties : search;
   }
 
   render() {
-    const display = this.properDisplay();
-
     return(
       <div>
-        <CountiesPaginator { ...display } />
-        <ListGroup>{ buildGroupItems(display.counties) }</ListGroup>
-        <CountiesPaginator { ...display } />
+        <CountiesPaginator { ...this.properDisplay() } />
+        <ListGroup>{ buildGroupItems(this.properDisplay().counties) }</ListGroup>
+        <CountiesPaginator { ...this.properDisplay() } />
       </div>
     );
   }
 }
 
-const mapState = ({
-  countiesIndex: {
-    selected,
-    currentPage,
-    pages,
-    pageCounties,
-    currentPageFromSearch,
-    pagesFromSearch,
-    pageCountiesFromSearch
-  },
-  form }) => {
+const mapState = ({ allCounties, search, form }) => {
   return {
-    selected,
-    currentPage,
-    pages,
-    pageCounties,
-    currentPageFromSearch,
-    pagesFromSearch,
-    pageCountiesFromSearch,
+    allCounties,
+    search,
     searchName: getCurrentSearchName(form)
   };
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Nav, NavItem } from 'react-bootstrap';
-import { watchingValues } from '../../redux/reducer/countiesIndex';
+import { watchingValues } from '../../redux/reducer/allCounties';
 
 class CountiesIndexTabs extends Component {
   handleSelect(eventKey) {
@@ -17,7 +17,7 @@ class CountiesIndexTabs extends Component {
 
         <NavItem
           eventKey={watchingValues.search}
-          disabled={this.props.pageCountiesFromSearch.length === 0}>
+          disabled={this.props.countiesFromSearch.length === 0}>
           Búsqueda
         </NavItem>
       </Nav>

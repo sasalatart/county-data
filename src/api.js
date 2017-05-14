@@ -2,8 +2,8 @@ import * as axios from 'axios';
 
 const retrievePaginatedResponseJSON = (response) => {
   const countiesData = response.data.counties;
-  const { page: currentPage, pages, docs: pageCounties } = countiesData;
-  return { currentPage, pages, pageCounties };
+  const { page: currentPage, pages, docs: counties } = countiesData;
+  return { currentPage, pages, counties };
 };
 
 export const getCounties = (page) => {

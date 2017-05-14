@@ -1,6 +1,9 @@
 export {
   changeWatching,
-  fetchAllCounties,
+  fetchAllCounties
+} from './allCounties';
+
+export {
   searchByName,
   clearCountySearch
-} from './countiesIndex';
+} from './search';

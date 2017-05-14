@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { searchByName, clearCountySearch } from '../../redux/actions';
+import { changeWatching, searchByName, clearCountySearch } from '../../redux/actions';
+import { watchingValues } from '../../redux/reducer/allCounties';
 import {
   Navbar,
   FormGroup,
@@ -10,7 +11,12 @@ import {
   Button
 } from 'react-bootstrap';
 
-const countyNameForm = ({ searchByName, clearCountySearch }) => {
+const countyNameForm = ({ changeWatching, searchByName, clearCountySearch }) => {
+  const handleClick = () => {
+    clearCountySearch();
+    changeWatching(watchingValues.all);
+  };
+
   return(
     <Navbar.Form pullLeft>
       <FormGroup>
@@ -26,12 +32,12 @@ const countyNameForm = ({ searchByName, clearCountySearch }) => {
         </InputGroup>
       </FormGroup>
       { ' ' }
-      <Button type="button" onClick={clearCountySearch}>Clear Search</Button>
+      <Button type="button" onClick={handleClick}>Clear Search</Button>
     </Navbar.Form>
   );
 };
 
 const form = reduxForm({ form: 'countySearch' })(countyNameForm);
 
-const mapDispatch = { searchByName, clearCountySearch };
+const mapDispatch = { changeWatching, searchByName, clearCountySearch };
 export default connect(null, mapDispatch)(form);
