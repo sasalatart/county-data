@@ -19,8 +19,7 @@ class CountiesIndex extends Component {
           changeWatching={this.props.changeWatching}
           countiesFromSearch={this.props.countiesFromSearch} />
 
-        <CountiesList
-          onCountyClick={() => console.log('clicked')} />
+        <CountiesList />
       </div>
     );
   }

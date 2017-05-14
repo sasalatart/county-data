@@ -1,13 +1,13 @@
 import React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 
-export const buildGroupItems = counties => {
+export const buildGroupItems = (counties, onCountyClick) => {
   return counties.map(county => {
     return(
       <ListGroupItem
         key={county._id}
         header={county.name}
-        onClick={() => console.log(county._id)}>
+        onClick={() => onCountyClick(county._id)}>
 
         {county.state}
       </ListGroupItem>

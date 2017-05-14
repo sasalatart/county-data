@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
 import CountiesPaginator from './CountiesPaginator';
-import { fetchAllCounties, searchByName } from '../../redux/actions';
+import { fetchAllCounties, searchByName, fetchCounty } from '../../redux/actions';
 import { watchingValues } from '../../redux/reducer/allCounties';
 import { buildGroupItems, getCurrentSearchName } from '../../utils';
 
@@ -26,7 +26,11 @@ class CountiesList extends Component {
     return(
       <div>
         <CountiesPaginator { ...this.properDisplay() } />
-        <ListGroup>{ buildGroupItems(this.properDisplay().counties) }</ListGroup>
+
+        <ListGroup>
+          { buildGroupItems(this.properDisplay().counties, this.props.fetchCounty) }
+        </ListGroup>
+
         <CountiesPaginator { ...this.properDisplay() } />
       </div>
     );
@@ -40,6 +44,6 @@ const mapState = ({ allCounties, search, form }) => {
     searchName: getCurrentSearchName(form)
   };
 };
-const mapDispatch = ({ fetchAllCounties, searchByName });
+const mapDispatch = ({ fetchAllCounties, searchByName, fetchCounty });
 
 export default connect(mapState, mapDispatch)(CountiesList);

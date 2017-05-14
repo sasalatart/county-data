@@ -7,3 +7,7 @@ export {
   searchByName,
   clearCountySearch
 } from './search';
+
+export {
+  fetchCounty
+} from './currentCounty';

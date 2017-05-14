@@ -6,14 +6,14 @@ import {
   SET_PAGE_COUNTIES,
 } from '../reducer/allCounties';
 
-export const changeWatching = (selected) => {
+export const changeWatching = selected => {
   return {
     type: CHANGE_WATCHING,
     selected
   };
 };
 
-export const fetchAllCounties = (page) => (dispatch) => {
+export const fetchAllCounties = page => dispatch => {
   getCounties(page).then(({ currentPage, pages, counties }) => {
     dispatch({
       type: SET_PAGE_COUNTIES,
