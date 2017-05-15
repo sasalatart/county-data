@@ -10,7 +10,7 @@ import {
 } from '../reducer/search';
 
 export const searchByName = (name, page) => (dispatch) => {
-  if (name.length < 3) {
+  if (name.length === 0) {
     return;
   }
 
