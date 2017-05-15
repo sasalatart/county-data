@@ -1,15 +1,16 @@
 import React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
+import _ from 'lodash';
 import decamelize from 'decamelize';
 
-export const buildGroupItems = (counties, onCountyClick) => {
+export const buildGroupItems = (counties, onCountyClick, currentCounty) => {
   return counties.map(county => {
     return(
       <ListGroupItem
         key={county._id}
         header={county.name}
-        onClick={() => onCountyClick(county._id)}>
-
+        onClick={() => onCountyClick(county._id)}
+        active={county._id === _.get(currentCounty, '_id')}>
         {county.state}
       </ListGroupItem>
     );

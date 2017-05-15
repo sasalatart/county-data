@@ -24,23 +24,27 @@ class CountiesList extends Component {
   }
 
   render() {
+    const properDisplay = this.properDisplay();
+    const { fetchCounty, currentCounty } = this.props;
+
     return(
       <div>
-        <CountiesPaginator { ...this.properDisplay() } />
+        <CountiesPaginator { ...properDisplay } />
 
         <ListGroup>
-          { buildGroupItems(this.properDisplay().counties, this.props.fetchCounty) }
+          { buildGroupItems(properDisplay.counties, fetchCounty, currentCounty) }
         </ListGroup>
 
-        <CountiesPaginator { ...this.properDisplay() } />
+        <CountiesPaginator { ...properDisplay } />
       </div>
     );
   }
 }
 
-const mapState = ({ allCounties, search, form: { countySearch } }) => {
+const mapState = ({ allCounties, currentCounty, search, form: { countySearch } }) => {
   return {
     allCounties,
+    currentCounty,
     search,
     searchName: _.get(countySearch, 'values.name')
   };
