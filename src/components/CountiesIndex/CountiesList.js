@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
+import _ from 'lodash';
 import CountiesPaginator from './CountiesPaginator';
 import { fetchAllCounties, searchByName, fetchCounty } from '../../redux/actions';
 import { watchingValues } from '../../redux/reducer/allCounties';
-import { buildGroupItems, getCurrentSearchName } from '../../utils';
+import { buildGroupItems } from '../../utils';
 
 class CountiesList extends Component {
   properDisplay() {
@@ -37,11 +38,11 @@ class CountiesList extends Component {
   }
 }
 
-const mapState = ({ allCounties, search, form }) => {
+const mapState = ({ allCounties, search, form: { countySearch } }) => {
   return {
     allCounties,
     search,
-    searchName: getCurrentSearchName(form)
+    searchName: _.get(countySearch, 'values.name')
   };
 };
 const mapDispatch = ({ fetchAllCounties, searchByName, fetchCounty });

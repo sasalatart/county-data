@@ -4,8 +4,12 @@ body {
   font-family: sans-serif;
 }
 
-h1 {
+h1, h3 {
   text-align: center;
+}
+
+h3 {
+  font-style: italic;
 }
 
 .flex-justify-center {

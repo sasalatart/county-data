@@ -23,7 +23,7 @@ const countyNameForm = ({ changeWatching, searchByName, clearCountySearch }) => 
         <InputGroup>
           <InputGroup.Addon><Glyphicon glyph="search"/></InputGroup.Addon>
           <Field
-            name="countyName"
+            name="name"
             component="input"
             type="text"
             className="form-control"
