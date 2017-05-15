@@ -23,16 +23,23 @@ class CountiesList extends Component {
     return allCounties.selected === watchingValues.all ? allCounties : search;
   }
 
+  handleCountyClick(id) {
+    this.props.fetchCounty(id, this.props.subjectForm);
+  }
+
   render() {
     const properDisplay = this.properDisplay();
-    const { fetchCounty, currentCounty } = this.props;
 
     return(
       <div>
         <CountiesPaginator { ...properDisplay } />
 
         <ListGroup>
-          { buildGroupItems(properDisplay.counties, fetchCounty, currentCounty) }
+          {
+            buildGroupItems(properDisplay.counties,
+              this.handleCountyClick.bind(this),
+              this.props.currentCounty)
+          }
         </ListGroup>
 
         <CountiesPaginator { ...properDisplay } />
@@ -41,12 +48,17 @@ class CountiesList extends Component {
   }
 }
 
-const mapState = ({ allCounties, currentCounty, search, form: { countySearch } }) => {
+const mapState = ({
+  allCounties,
+  currentCounty,
+  search,
+  form: { countySearch, subject }}) => {
   return {
     allCounties,
     currentCounty,
     search,
-    searchName: _.get(countySearch, 'values.name')
+    searchName: _.get(countySearch, 'values.name'),
+    subjectForm: subject
   };
 };
 const mapDispatch = ({ fetchAllCounties, searchByName, fetchCounty });

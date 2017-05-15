@@ -27,4 +27,4 @@ const IndicatorForm = ({ indicators, selectedIndicator, subjectJSONArray }) => {
   );
 };
 
-export default reduxForm({ form: 'graph' })(IndicatorForm);
+export default reduxForm({ form: 'indicator' })(IndicatorForm);

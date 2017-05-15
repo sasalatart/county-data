@@ -35,13 +35,13 @@ class County extends Component {
   }
 }
 
-const mapState = ({ currentCounty, form: { subject, graph } }) => {
+const mapState = ({ currentCounty, form: { subject, indicator } }) => {
   const selectedSubject = _.get(subject, 'values.name');
 
   return {
     selectedSubject,
     selectedYear: _.get(subject, 'values.year'),
-    selectedIndicator: _.get(graph, 'values.stat'),
+    selectedIndicator: _.get(indicator, 'values.stat'),
     subjectJSONArray: _.get(currentCounty.statistics, `${selectedSubject}`, [])
   };
 };
