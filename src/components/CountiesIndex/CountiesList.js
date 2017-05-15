@@ -8,7 +8,7 @@ import { watchingValues } from '../../redux/reducer/allCounties';
 import { buildGroupItems } from '../../utils';
 
 class CountiesList extends Component {
-  properDisplay() {
+  tabWatched() {
     const allCounties = {
       ...this.props.allCounties,
       fetchFunction: this.props.fetchAllCounties
@@ -23,26 +23,30 @@ class CountiesList extends Component {
     return allCounties.selected === watchingValues.all ? allCounties : search;
   }
 
+  properDisplay(counties) {
+    if (counties.length > 0) {
+      return(
+        <ListGroup>
+          { buildGroupItems(counties, this.handleCountyClick.bind(this), this.props.currentCounty) }
+        </ListGroup>
+      );
+    } else {
+      return <h3>There are no counties available.</h3>;
+    }
+  }
+
   handleCountyClick(id) {
     this.props.fetchCounty(id, this.props.subjectForm);
   }
 
   render() {
-    const properDisplay = this.properDisplay();
+    const tabWatched = this.tabWatched();
 
     return(
       <div>
-        { properDisplay.pages > 1 && <CountiesPaginator { ...properDisplay } /> }
-
-        <ListGroup>
-          {
-            buildGroupItems(properDisplay.counties,
-              this.handleCountyClick.bind(this),
-              this.props.currentCounty)
-          }
-        </ListGroup>
-
-        { properDisplay.pages > 1 && <CountiesPaginator { ...properDisplay } /> }
+        { tabWatched.pages > 1 && <CountiesPaginator { ...tabWatched } /> }
+        { this.properDisplay.bind(this)(tabWatched.counties) }
+        { tabWatched.pages > 1 && <CountiesPaginator { ...tabWatched } /> }
       </div>
     );
   }
