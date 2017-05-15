@@ -17,9 +17,9 @@ export const buildGroupItems = (counties, onCountyClick, currentCounty) => {
   });
 };
 
-export const buildSubjectOptions = (statistics, selected) => {
+export const buildSubjectOptions = (subjects, selected) => {
   const options = selected ? [] : [<option key={0}>Select subject...</option>];
-  options.push(Object.keys(statistics).map(key => {
+  options.push(Object.keys(subjects).map(key => {
     return <option key={key} value={key}>{decamelize(key, ' ')}</option>;
   }));
 
@@ -27,9 +27,19 @@ export const buildSubjectOptions = (statistics, selected) => {
 };
 
 export const buildYearOptions = (subjectArray, selected) => {
-  const options = selected ? [] : [<option key={0}>Select year...</option>];
+  const options = selected ? [] : [<option key={0}>Select year for the table...</option>];
   options.push(subjectArray.map(({ year }) => {
     return <option key={year} value={year}>{year}</option>;
+  }));
+
+  return options;
+};
+
+export const buildIndicatorOptions = (indicators, selected) => {
+  indicators = _.reject(indicators, stat => _.includes(['_id', 'year'], stat));
+  const options = selected ? [] : [<option key={0}>Select stat for the graph...</option>];
+  options.push(indicators.map(key => {
+    return <option key={key} value={key}>{decamelize(key, ' ')}</option>;
   }));
 
   return options;

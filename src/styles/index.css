@@ -16,3 +16,15 @@ h3 {
   display: flex;
   justify-content: center;
 }
+
+.recharts-responsive-container {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+
+.recharts-wrapper, .recharts-surface {
+  display: inherit;
+  max-height: 100%;
+  max-width: 100%;
+}
