@@ -1,3 +1,3 @@
 module.exports.countyPaginateParams = page => {
-  return { page, limit: 25, select: 'state fipsCode name' };
+  return { page, limit: 20, select: 'state fipsCode name' };
 };
