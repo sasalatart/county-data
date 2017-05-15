@@ -32,7 +32,7 @@ class CountiesList extends Component {
 
     return(
       <div>
-        <CountiesPaginator { ...properDisplay } />
+        { properDisplay.pages > 1 && <CountiesPaginator { ...properDisplay } /> }
 
         <ListGroup>
           {
@@ -42,7 +42,7 @@ class CountiesList extends Component {
           }
         </ListGroup>
 
-        <CountiesPaginator { ...properDisplay } />
+        { properDisplay.pages > 1 && <CountiesPaginator { ...properDisplay } /> }
       </div>
     );
   }
