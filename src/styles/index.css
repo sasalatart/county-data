@@ -23,8 +23,8 @@ h3 {
   width: 100%;
 }
 
-.recharts-wrapper, .recharts-surface {
-  display: inherit;
+.recharts-surface {
+  display: inline-block;
   max-height: 100%;
   max-width: 100%;
 }

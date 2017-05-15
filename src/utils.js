@@ -3,6 +3,8 @@ import { ListGroupItem } from 'react-bootstrap';
 import _ from 'lodash';
 import decamelize from 'decamelize';
 
+export const WELL_PADDING = 20;
+
 export const buildGroupItems = (counties, onCountyClick, currentCounty) => {
   return counties.map(county => {
     return(

@@ -1,30 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Measure from 'react-measure';
 import { Field, reduxForm } from 'redux-form';
 import { Well, FormGroup, ControlLabel } from 'react-bootstrap';
 import IndicatorGraph from './IndicatorGraph';
-import { buildIndicatorOptions } from '../../utils';
+import { buildIndicatorOptions, WELL_PADDING } from '../../utils';
 
-const IndicatorForm = ({ indicators, selectedIndicator, subjectJSONArray }) => {
-  const data = subjectJSONArray.map(yearData => {
-    const json = { year: yearData.year };
-    json[selectedIndicator] = yearData[selectedIndicator];
-    return json;
-  });
+class IndicatorForm extends Component {
+  state = { graphHeight: 0, graphWidth: 0 };
 
-  return(
-    <Well>
-      <form>
-        <FormGroup>
-          <ControlLabel>Indicator</ControlLabel>
-          <Field name="stat" component="select" className="form-control">
-            { buildIndicatorOptions(indicators, selectedIndicator) }
-          </Field>
-        </FormGroup>
-      </form>
+  onMeasureHandler(dimensions) {
+    this.setState({
+      graphHeight: (dimensions.width / 2) - (WELL_PADDING * 2),
+      graphWidth: dimensions.width - (WELL_PADDING * 2)
+    });
+  }
 
-      { selectedIndicator && <IndicatorGraph data={data} yDataKey={selectedIndicator} /> }
-    </Well>
-  );
+  render() {
+    const { indicators, selectedIndicator, subjectJSONArray } = this.props;
+    const { graphHeight, graphWidth } = this.state;
+    const data = subjectJSONArray.map(yearData => {
+      const json = { year: yearData.year };
+      json[selectedIndicator] = yearData[selectedIndicator];
+      return json;
+    });
+
+    return(
+      <Measure onMeasure={this.onMeasureHandler.bind(this)}>
+        <Well style={ { padding: WELL_PADDING } }>
+          <form>
+            <FormGroup>
+              <ControlLabel>Indicator</ControlLabel>
+              <Field name="stat" component="select" className="form-control">
+                { buildIndicatorOptions(indicators, selectedIndicator) }
+              </Field>
+            </FormGroup>
+          </form>
+
+          {
+            selectedIndicator &&
+            <IndicatorGraph
+              data={data}
+              height={graphHeight}
+              width={graphWidth}
+              yDataKey={selectedIndicator} />
+          }
+        </Well>
+      </Measure>
+    );
+  }
 };
 
 export default reduxForm({ form: 'indicator' })(IndicatorForm);

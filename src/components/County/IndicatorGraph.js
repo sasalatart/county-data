@@ -9,10 +9,10 @@ import {
   Tooltip
 } from 'recharts';
 
-const IndicatorGraph = ({ data, yDataKey }) => {
+const IndicatorGraph = ({ data, height, width, yDataKey }) => {
   return(
     <div className="recharts-responsive-container">
-      <LineChart width={600} height={300} data={data}>
+      <LineChart data={data} height={height} width={width}>
        <XAxis dataKey="year" />
        <YAxis />
        <Tooltip />
