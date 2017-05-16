@@ -1,19 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Col, Jumbotron } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import _ from 'lodash';
+import Header from './Header';
 import SubjectForm from './SubjectForm';
 import IndicatorForm from './IndicatorForm';
 
-const County = ({ currentCounty, selectedSubject, selectedYear, selectedIndicator }) => {
+const County = ({
+  currentCounty,
+  selectedSubject,
+  selectedYear,
+  selectedIndicator
+}) => {
   currentCounty.statistics = _.omitBy(currentCounty.statistics, _.isEmpty);
 
   return(
     <Col sm={12}>
-      <Jumbotron>
-        <h1>{ currentCounty.name }</h1>
-        <h3>{ currentCounty.state }</h3>
-      </Jumbotron>
+      <Header />
 
       <SubjectForm
         selectedSubject={selectedSubject}

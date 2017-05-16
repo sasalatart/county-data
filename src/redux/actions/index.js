@@ -12,3 +12,8 @@ export {
   fetchCounty,
   countyFormResetOnSubjectChange
 } from './currentCounty';
+
+export {
+  addToFavourites,
+  removeFromFavourites
+} from './favourites';
