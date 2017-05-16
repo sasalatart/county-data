@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import { reset, change } from 'redux-form';
 import _ from 'lodash';
 import { getCounty } from '../../api';
@@ -54,6 +55,7 @@ export const fetchCounty = id => (dispatch, getState) => {
   dispatch(setLoading(true));
   getCounty(id).then(county => {
     dispatch(setCounty(county));
+    dispatch(push(`/counties/${county._id}`));
     dispatch(countyFormReset(county, _.get(getState(), 'form.subject')));
     dispatch(setLoading(false));
   });

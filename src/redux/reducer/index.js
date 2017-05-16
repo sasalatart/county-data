@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
+import { routerReducer } from 'react-router-redux';
 import currentCounty from './currentCounty';
 import watching from './watching';
 import allCounties from './allCounties';
@@ -12,5 +13,6 @@ export default combineReducers({
   allCounties,
   searchedCounties,
   favouriteCounties,
+  router: routerReducer,
   form
 });
