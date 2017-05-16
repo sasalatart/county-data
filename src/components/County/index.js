@@ -19,28 +19,26 @@ const County = ({
       <Header />
 
       <SubjectForm
+        availableSubjects={currentCounty.statistics}
         selectedSubject={selectedSubject}
         selectedYear={selectedYear}
-        selectedIndicator={selectedIndicator}
-        currentCounty={currentCounty} />
+        selectedIndicator={selectedIndicator} />
 
       {
         selectedSubject && selectedYear &&
         <IndicatorForm
+          availableSubjects={currentCounty.statistics}
           selectedSubject={selectedSubject}
-          selectedIndicator={selectedIndicator}
-          currentCounty={currentCounty} />
+          selectedIndicator={selectedIndicator} />
       }
     </Col>
   );
 };
 
 const mapState = ({ currentCounty, form: { subject, indicator } }) => {
-  const selectedSubject = _.get(subject, 'values.name');
-
   return {
     currentCounty,
-    selectedSubject,
+    selectedSubject: _.get(subject, 'values.name'),
     selectedYear: _.get(subject, 'values.year'),
     selectedIndicator: _.get(indicator, 'values.stat')
   };

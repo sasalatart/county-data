@@ -8,22 +8,20 @@ import { countyFormResetOnSubjectChange } from '../../redux/actions';
 import { buildSubjectOptions, buildYearOptions } from '../../utils';
 
 const SubjectForm = ({
-  currentCounty,
+  availableSubjects,
   selectedSubject,
   selectedYear,
   selectedIndicator,
   countyFormResetOnSubjectChange
 }) => {
-  const { statistics } = currentCounty;
-
-  const data = _.find(statistics[selectedSubject], o => {
+  const data = _.find(availableSubjects[selectedSubject], o => {
     return o.year === parseInt(selectedYear, 10);
   }) || {};
   delete data._id;
 
   const handleSubjectChange = evt => {
-    const newSubject = statistics[evt.target.value];
-    const previousSubject = statistics[selectedSubject];
+    const newSubject = availableSubjects[evt.target.value];
+    const previousSubject = availableSubjects[selectedSubject];
     countyFormResetOnSubjectChange(newSubject, previousSubject, selectedYear, selectedIndicator);
   };
 
@@ -35,7 +33,7 @@ const SubjectForm = ({
             <FormGroup>
               <ControlLabel>Subject</ControlLabel>
               <Field name="name" component="select" className="form-control" onChange={handleSubjectChange}>
-                { buildSubjectOptions(statistics, selectedSubject) }
+                { buildSubjectOptions(availableSubjects, selectedSubject) }
               </Field>
             </FormGroup>
           </Col>
@@ -46,7 +44,7 @@ const SubjectForm = ({
               <FormGroup>
                 <ControlLabel>Year</ControlLabel>
                 <Field name="year" component="select" className="form-control">
-                  { buildYearOptions(statistics[selectedSubject], selectedYear) }
+                  { buildYearOptions(availableSubjects[selectedSubject], selectedYear) }
                 </Field>
               </FormGroup>
             }

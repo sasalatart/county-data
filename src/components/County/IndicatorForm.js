@@ -16,12 +16,12 @@ class IndicatorForm extends Component {
   }
 
   render() {
-    const { currentCounty, selectedSubject, selectedIndicator } = this.props;
+    const { availableSubjects, selectedSubject, selectedIndicator } = this.props;
     const { graphHeight, graphWidth } = this.state;
 
-    const indicators = Object.keys(currentCounty.statistics[selectedSubject][0]);
+    const indicators = Object.keys(availableSubjects[selectedSubject][0]);
 
-    const data = currentCounty.statistics[selectedSubject].map(yearData => {
+    const data = availableSubjects[selectedSubject].map(yearData => {
       const json = { year: yearData.year };
       json[selectedIndicator] = yearData[selectedIndicator];
       return json;
