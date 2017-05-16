@@ -25,7 +25,7 @@ const CountiesIndexTabs = ({
       <NavItem
         eventKey={watchingValues.search}
         disabled={!anyCountyFromSearch}>
-        Search Results
+        Search
       </NavItem>
     </Nav>
   );

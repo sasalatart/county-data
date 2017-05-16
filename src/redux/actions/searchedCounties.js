@@ -35,6 +35,8 @@ const setSearchedCounties = ({ currentPage, pages, counties }) => {
 
 export const searchByName = (page, name) => (dispatch) => {
   if (name.length === 0) {
+    dispatch({ type: CLEAR_COUNTY_SEARCH });
+    dispatch(changeWatching(watchingValues.all));
     return;
   }
 
