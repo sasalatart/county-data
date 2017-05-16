@@ -6,11 +6,10 @@ import { addToFavourites, removeFromFavourites } from '../../redux/actions';
 
 const Header = ({
   currentCounty,
-  favouriteIds,
+  inFavourites,
   addToFavourites,
   removeFromFavourites
 }) => {
-  const inFavourites = _.includes(favouriteIds, currentCounty._id);
   const buttonToRender = inFavourites ?
     <Button bsStyle="warning" onClick={() => removeFromFavourites(currentCounty._id)}>
       Remove From Favourites
@@ -31,7 +30,7 @@ const Header = ({
 const mapState = ({ currentCounty, favouriteCounties }) => {
   return {
     currentCounty,
-    favouriteIds: favouriteCounties.counties.map(({ _id }) => _id)
+    inFavourites: _.includes(favouriteCounties.counties.map(({ _id }) => _id), currentCounty._id)
   };
 };
 const mapDispatch = { addToFavourites, removeFromFavourites };
