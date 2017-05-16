@@ -22,8 +22,8 @@ const store = createStore(
 );
 
 store.subscribe(throttle(() => {
-  const { currentCounty, favouriteCounties } = store.getState();
-  saveState({ currentCounty, favouriteCounties });
+  const { currentCounty, favouriteCounties, form: { indicator, subject } } = store.getState();
+  saveState({ currentCounty, favouriteCounties, form: { indicator, subject } });
 }), 1000);
 
 export default store;
