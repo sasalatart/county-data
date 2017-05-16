@@ -14,7 +14,7 @@ export const getCounties = page => {
   });
 };
 
-export const findCountiesByName = (name, page) => {
+export const findCountiesByName = (page, name) => {
   return new Promise(res => {
     axios.get(`/counties/search/${name}?page=${page}`).then(response => {
       res(retrievePaginatedResponseJSON(response));

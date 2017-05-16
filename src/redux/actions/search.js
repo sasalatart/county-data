@@ -9,12 +9,12 @@ import {
   CLEAR_COUNTY_SEARCH
 } from '../reducer/search';
 
-export const searchByName = (name, page) => (dispatch) => {
+export const searchByName = (page, name) => (dispatch) => {
   if (name.length === 0) {
     return;
   }
 
-  findCountiesByName(name, page).then(({ currentPage, pages, counties }) => {
+  findCountiesByName(page, name).then(({ currentPage, pages, counties }) => {
     dispatch({
       type: SET_SEARCH_PAGE_COUNTIES,
       currentPage,

@@ -8,14 +8,14 @@ import { buildListGroup } from '../../utils';
 
 class CountiesList extends Component {
   tabWatched() {
-    const { allCounties, fetchAllCounties, favourites, search, searchByName, searchName } = this.props;
+    const { allCounties, fetchAllCounties, favourites, search, searchByName } = this.props;
 
     if (allCounties.selected === watchingValues.all) {
       return { ...allCounties, fetchFunction: fetchAllCounties };
     } else if (allCounties.selected === watchingValues.fav) {
       return { counties: favourites.counties };
     } else {
-      return { ...search, fetchFunction: searchByName, countyName: searchName };
+      return { ...search, fetchFunction: searchByName };
     }
   }
 
@@ -45,17 +45,16 @@ class CountiesList extends Component {
 }
 
 const mapState = ({
-  allCounties,
   currentCounty,
+  allCounties,
   search,
   favourites,
-  form: { countySearch, subject }}) => {
+  form: { subject }}) => {
   return {
-    allCounties,
     currentCountyId: currentCounty._id,
+    allCounties,
     search,
     favourites,
-    searchName: _.get(countySearch, 'values.name'),
     subjectForm: subject
   };
 };

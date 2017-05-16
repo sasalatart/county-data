@@ -28,7 +28,7 @@ const countyNameForm = ({ changeWatching, searchByName, clearCountySearch }) => 
             type="text"
             className="form-control"
             placeholder="Search by name"
-            onChange={evt => searchByName(evt.target.value, 1)} />
+            onChange={evt => searchByName(1, evt.target.value)} />
         </InputGroup>
       </FormGroup>
       { ' ' }

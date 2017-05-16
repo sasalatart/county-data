@@ -1,11 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Pagination } from 'react-bootstrap';
+import _ from 'lodash';
 
-const CountiesPaginator = ({ currentPage, pages, fetchFunction, countyName }) => {
-  const handleSelect = (page) => {
-    countyName ? fetchFunction(countyName, page) : fetchFunction(page);
-  };
-
+const CountiesPaginator = ({ currentPage, pages, fetchFunction, searchedName }) => {
   return(
     <div className="flex-justify-center">
       <Pagination
@@ -17,10 +15,16 @@ const CountiesPaginator = ({ currentPage, pages, fetchFunction, countyName }) =>
         items={pages}
         maxButtons={3}
         activePage={currentPage}
-        onSelect={handleSelect}
+        onSelect={page => fetchFunction(page, searchedName)}
       />
     </div>
   );
 };
 
-export default CountiesPaginator;
+const mapState = ({ form: { countySearch } }) => {
+  return {
+    searchedName: _.get(countySearch, 'values.name')
+  };
+};
+
+export default connect(mapState)(CountiesPaginator);
