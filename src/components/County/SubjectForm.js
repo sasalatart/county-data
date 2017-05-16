@@ -60,8 +60,8 @@ const SubjectForm = ({
 
 SubjectForm.propTypes = {
   availableSubjects: PropTypes.object.isRequired,
-  selectedSubject: PropTypes.string.isRequired,
-  selectedYear: PropTypes.number.isRequired,
+  selectedSubject: PropTypes.string,
+  selectedYear: PropTypes.number,
   selectedIndicator: PropTypes.string
 };
 
