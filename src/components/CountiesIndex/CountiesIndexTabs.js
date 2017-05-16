@@ -14,18 +14,18 @@ const CountiesIndexTabs = ({
     <Nav justified bsStyle="tabs"
       activeKey={currentTab}
       onSelect={changeWatching}>
-      <NavItem eventKey={watchingValues.all}>Todos</NavItem>
+      <NavItem eventKey={watchingValues.all}>All</NavItem>
 
       <NavItem
         eventKey={watchingValues.fav}
         disabled={!anyCountyFromFavourites}>
-        Favoritos
+        Favourites
       </NavItem>
 
       <NavItem
         eventKey={watchingValues.search}
         disabled={!anyCountyFromSearch}>
-        Búsqueda
+        Search Results
       </NavItem>
     </Nav>
   );
