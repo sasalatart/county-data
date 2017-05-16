@@ -50,11 +50,11 @@ const setLoading = loading => {
   };
 };
 
-export const fetchCounty = (id, subjectForm) => dispatch => {
+export const fetchCounty = id => (dispatch, getState) => {
   dispatch(setLoading(true));
   getCounty(id).then(county => {
     dispatch(setCounty(county));
-    dispatch(countyFormReset(county, subjectForm));
+    dispatch(countyFormReset(county, _.get(getState(), 'form.subject')));
     dispatch(setLoading(false));
   });
 };

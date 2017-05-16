@@ -24,14 +24,10 @@ class CountiesList extends Component {
     if (loading) {
       return <Spinner size={128} />;
     } else if (counties.length > 0) {
-      return buildListGroup(counties, this.handleCountyClick.bind(this), this.props.currentCountyId);
+      return buildListGroup(counties, this.props.fetchCounty, this.props.currentCountyId);
     } else {
       return <h3>There are no counties available.</h3>;
     }
-  }
-
-  handleCountyClick(id) {
-    this.props.fetchCounty(id, this.props.subjectForm);
   }
 
   render() {
@@ -52,15 +48,14 @@ const mapState = ({
   watching: { currentTab },
   allCounties,
   searchedCounties,
-  favouriteCounties,
-  form: { subject }}) => {
+  favouriteCounties
+}) => {
   return {
     currentCountyId: currentCounty._id,
     currentTab,
     allCounties,
     searchedCounties,
-    favouriteCounties,
-    subjectForm: subject
+    favouriteCounties
   };
 };
 const mapDispatch = ({ fetchAllCounties, searchByName, fetchCounty });
