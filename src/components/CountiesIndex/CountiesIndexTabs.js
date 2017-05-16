@@ -6,25 +6,25 @@ import { watchingValues } from '../../redux/reducer/watching';
 
 const CountiesIndexTabs = ({
   currentTab,
-  countiesFromSearch,
-  countiesFromFavourites,
+  anyCountyFromSearch,
+  anyCountyFromFavourites,
   changeWatching
 }) => {
   return(
     <Nav justified bsStyle="tabs"
       activeKey={currentTab}
-      onSelect={eventKey => changeWatching(eventKey)}>
+      onSelect={changeWatching}>
       <NavItem eventKey={watchingValues.all}>Todos</NavItem>
 
       <NavItem
         eventKey={watchingValues.fav}
-        disabled={countiesFromFavourites.length === 0}>
+        disabled={!anyCountyFromFavourites}>
         Favoritos
       </NavItem>
 
       <NavItem
         eventKey={watchingValues.search}
-        disabled={countiesFromSearch.length === 0}>
+        disabled={!anyCountyFromSearch}>
         Búsqueda
       </NavItem>
     </Nav>
@@ -34,8 +34,8 @@ const CountiesIndexTabs = ({
 const mapState = ({ watching, searchedCounties, favouriteCounties }) => {
   return {
     currentTab: watching.currentTab,
-    countiesFromFavourites: favouriteCounties.counties,
-    countiesFromSearch: searchedCounties.counties
+    anyCountyFromFavourites: favouriteCounties.counties.length > 0,
+    anyCountyFromSearch: searchedCounties.counties.length > 0
   };
 };
 const mapDispatch = { changeWatching };
