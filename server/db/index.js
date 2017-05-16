@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
 
-const DB_HOST = process.env.DB_HOST || 'localhost';
-const DB_PORT = process.env.DB_PORT || 27017;
-mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/countyData`);
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/countyData';
+mongoose.connect(MONGODB_URI);
 mongoose.Promise = bluebird;
 
 module.exports = mongoose;
