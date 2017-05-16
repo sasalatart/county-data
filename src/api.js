@@ -8,7 +8,7 @@ const retrievePaginatedResponseJSON = response => {
 
 export const getCounties = page => {
   return new Promise(res => {
-    axios.get(`/counties?page=${page}`).then(response => {
+    axios.get(`/api/counties?page=${page}`).then(response => {
       res(retrievePaginatedResponseJSON(response));
     });
   });
@@ -16,7 +16,7 @@ export const getCounties = page => {
 
 export const findCountiesByName = (page, name) => {
   return new Promise(res => {
-    axios.get(`/counties/search/${name}?page=${page}`).then(response => {
+    axios.get(`/api/counties/search/${name}?page=${page}`).then(response => {
       res(retrievePaginatedResponseJSON(response));
     });
   });
@@ -24,7 +24,7 @@ export const findCountiesByName = (page, name) => {
 
 export const getCounty = id => {
   return new Promise(res => {
-    axios.get(`/counties/${id}`).then(response => {
+    axios.get(`/api/counties/${id}`).then(response => {
       const { county } = response.data;
       res(county);
     });
