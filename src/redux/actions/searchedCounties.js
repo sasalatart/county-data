@@ -1,7 +1,7 @@
 import { reset } from 'redux-form';
-import { changeWatching } from './allCounties';
+import { changeWatching } from './watching';
 import { findCountiesByName } from '../../api';
-import { watchingValues } from '../reducer/allCounties';
+import { watchingValues } from '../reducer/watching';
 
 import {
   SET_SEARCH_PAGE,

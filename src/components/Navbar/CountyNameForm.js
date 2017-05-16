@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { changeWatching, searchByName, clearCountySearch } from '../../redux/actions';
-import { watchingValues } from '../../redux/reducer/allCounties';
+import { watchingValues } from '../../redux/reducer/watching';
 import {
   Navbar,
   FormGroup,

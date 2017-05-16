@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Nav, NavItem } from 'react-bootstrap';
 import { changeWatching } from '../../redux/actions';
-import { watchingValues } from '../../redux/reducer/allCounties';
+import { watchingValues } from '../../redux/reducer/watching';
 
 const CountiesIndexTabs = ({
-  activeKey,
+  currentTab,
   countiesFromSearch,
   countiesFromFavourites,
   changeWatching
 }) => {
   return(
     <Nav justified bsStyle="tabs"
-      activeKey={activeKey}
+      activeKey={currentTab}
       onSelect={eventKey => changeWatching(eventKey)}>
       <NavItem eventKey={watchingValues.all}>Todos</NavItem>
 
@@ -31,9 +31,9 @@ const CountiesIndexTabs = ({
   );
 };
 
-const mapState = ({ allCounties, searchedCounties, favouriteCounties }) => {
+const mapState = ({ watching, searchedCounties, favouriteCounties }) => {
   return {
-    activeKey: allCounties.selected,
+    currentTab: watching.currentTab,
     countiesFromFavourites: favouriteCounties.counties,
     countiesFromSearch: searchedCounties.counties
   };

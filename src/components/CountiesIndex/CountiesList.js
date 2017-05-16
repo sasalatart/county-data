@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import CountiesPaginator from './CountiesPaginator';
 import { fetchAllCounties, searchByName, fetchCounty } from '../../redux/actions';
-import { watchingValues } from '../../redux/reducer/allCounties';
+import { watchingValues } from '../../redux/reducer/watching';
 import { buildListGroup } from '../../utils';
 
 class CountiesList extends Component {
   tabWatched() {
     const { allCounties, favouriteCounties, searchedCounties, fetchAllCounties, searchByName } = this.props;
 
-    if (allCounties.selected === watchingValues.all) {
+    if (this.props.currentTab === watchingValues.all) {
       return { ...allCounties, fetchFunction: fetchAllCounties };
-    } else if (allCounties.selected === watchingValues.fav) {
+    } else if (this.props.currentTab === watchingValues.fav) {
       return { counties: favouriteCounties.counties };
     } else {
       return { ...searchedCounties, fetchFunction: searchByName };
@@ -46,12 +46,14 @@ class CountiesList extends Component {
 
 const mapState = ({
   currentCounty,
+  watching: { currentTab },
   allCounties,
   searchedCounties,
   favouriteCounties,
   form: { subject }}) => {
   return {
     currentCountyId: currentCounty._id,
+    currentTab,
     allCounties,
     searchedCounties,
     favouriteCounties,

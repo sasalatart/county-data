@@ -1,10 +1,7 @@
-export const watchingValues = { all: 'all', fav: 'fav', search: 'search' };
-export const CHANGE_WATCHING = 'CHANGE_WATCHING';
 export const SET_PAGE = 'SET_PAGE';
 export const SET_PAGE_COUNTIES = 'SET_PAGE_COUNTIES';
 
 const initialState = {
-  selected: watchingValues.all,
   counties: [],
   pages: null,
   currentPage: 1
@@ -12,12 +9,6 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch(action.type) {
-    case CHANGE_WATCHING: {
-      return {
-        ...state,
-        selected: action.selected
-      };
-    }
     case SET_PAGE: {
       return {
         ...state,
