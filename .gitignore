@@ -1,7 +1,5 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-server/db/*.json
-
 # dependencies
 /node_modules
 
