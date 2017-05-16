@@ -52,11 +52,13 @@ const setLoading = loading => {
 };
 
 export const fetchCounty = id => (dispatch, getState) => {
+  const subjectForm = _.get(getState(), 'form.subject');
+
   dispatch(setLoading(true));
   getCounty(id).then(county => {
     dispatch(setCounty(county));
     dispatch(push(`/counties/${county._id}`));
-    dispatch(countyFormReset(county, _.get(getState(), 'form.subject')));
     dispatch(setLoading(false));
+    dispatch(countyFormReset(county, subjectForm));
   });
 };

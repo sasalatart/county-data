@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Measure from 'react-measure';
 import { Field, reduxForm } from 'redux-form';
 import { Well, FormGroup, ControlLabel } from 'react-bootstrap';
@@ -51,6 +52,12 @@ class IndicatorForm extends Component {
       </Measure>
     );
   }
+};
+
+IndicatorForm.propTypes = {
+  availableSubjects: PropTypes.object.isRequired,
+  selectedSubject: PropTypes.string,
+  selectedIndicator: PropTypes.string
 };
 
 export default reduxForm({ form: 'indicator' })(IndicatorForm);

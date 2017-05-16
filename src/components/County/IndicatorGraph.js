@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   LineChart,
@@ -21,6 +22,13 @@ const IndicatorGraph = ({ data, height, width, yDataKey }) => {
       </LineChart>
     </div>
   );
+};
+
+IndicatorGraph.propTypes = {
+  data: PropTypes.array.isRequired,
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  yDataKey: PropTypes.string.isRequired
 };
 
 export default IndicatorGraph;

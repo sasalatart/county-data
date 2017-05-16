@@ -17,6 +17,12 @@ h3 {
   justify-content: center;
 }
 
+.spinner {
+  display: inline-block;
+  position: absolute;
+  z-index: 10;
+}
+
 .recharts-responsive-container {
   display: inline-block;
   height: 100%;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 import decamelize from 'decamelize';
 
@@ -17,6 +18,10 @@ const SubjectTable = ({ data }) => {
       <tbody>{rows}</tbody>
     </Table>
   );
+};
+
+SubjectTable.propTypes = {
+  data: PropTypes.object.isRequired
 };
 
 export default SubjectTable;

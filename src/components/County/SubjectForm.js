@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Well, Row, Col, FormGroup, ControlLabel } from 'react-bootstrap';
@@ -57,8 +58,15 @@ const SubjectForm = ({
   );
 };
 
-const form = reduxForm({ form: 'subject' })(SubjectForm);
+SubjectForm.propTypes = {
+  availableSubjects: PropTypes.object.isRequired,
+  selectedSubject: PropTypes.string.isRequired,
+  selectedYear: PropTypes.number.isRequired,
+  selectedIndicator: PropTypes.string
+};
 
 const mapDispatch = { countyFormResetOnSubjectChange };
+
+const form = reduxForm({ form: 'subject' })(SubjectForm);
 
 export default connect(null, mapDispatch)(form);

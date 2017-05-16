@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Pagination } from 'react-bootstrap';
-import _ from 'lodash';
 
 const CountiesPaginator = ({ currentPage, pages, fetchFunction, searchedName }) => {
   return(
@@ -21,10 +20,11 @@ const CountiesPaginator = ({ currentPage, pages, fetchFunction, searchedName }) 
   );
 };
 
-const mapState = ({ form: { countySearch } }) => {
-  return {
-    searchedName: _.get(countySearch, 'values.name')
-  };
+CountiesPaginator.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  pages: PropTypes.number.isRequired,
+  fetchFunction: PropTypes.func.isRequired,
+  searchedName: PropTypes.string
 };
 
-export default connect(mapState)(CountiesPaginator);
+export default CountiesPaginator;

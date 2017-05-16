@@ -6,8 +6,8 @@ import { watchingValues } from '../../redux/reducer/watching';
 
 const CountiesIndexTabs = ({
   currentTab,
-  anyCountyFromSearch,
   anyCountyFromFavourites,
+  anyCountyFromSearch,
   changeWatching
 }) => {
   return(

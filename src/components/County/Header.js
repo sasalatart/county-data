@@ -1,8 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Jumbotron, Button } from 'react-bootstrap';
-import _ from 'lodash';
-import { addToFavourites, removeFromFavourites } from '../../redux/actions';
 
 const Header = ({
   currentCounty,
@@ -27,12 +25,11 @@ const Header = ({
   );
 };
 
-const mapState = ({ currentCounty, favouriteCounties }) => {
-  return {
-    currentCounty,
-    inFavourites: _.includes(favouriteCounties.counties.map(({ _id }) => _id), currentCounty._id)
-  };
+Header.propTypes = {
+  currentCounty: PropTypes.object.isRequired,
+  inFavourites: PropTypes.bool.isRequired,
+  addToFavourites: PropTypes.func.isRequired,
+  removeFromFavourites: PropTypes.func.isRequired
 };
-const mapDispatch = { addToFavourites, removeFromFavourites };
 
-export default connect(mapState, mapDispatch)(Header);
+export default Header;
