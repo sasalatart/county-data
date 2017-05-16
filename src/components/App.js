@@ -17,7 +17,7 @@ class App extends Component {
     }
 
     if (countyParamId !== currentCounty._id) {
-      this.props.fetchCounty(countyParamId);
+      this.props.fetchCounty(countyParamId ? countyParamId : currentCounty._id);
     }
   }
 
