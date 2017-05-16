@@ -1,10 +1,21 @@
-export const GET_COUNTY = 'GET_COUNTY';
+export const SET_COUNTY = 'SET_COUNTY';
+export const SET_CURRENT_COUNTY_LOADING = 'SET_CURRENT_COUNTY_LOADING';
 
-export default function reducer(state = {}, action) {
+const initialState = {
+  loading: true
+};
+
+export default function reducer(state = initialState, action) {
   switch(action.type) {
-    case GET_COUNTY: {
+    case SET_COUNTY: {
       return {
         ...action.county
+      };
+    }
+    case SET_CURRENT_COUNTY_LOADING: {
+      return {
+        ...state,
+        loading: action.loading
       };
     }
     default: {

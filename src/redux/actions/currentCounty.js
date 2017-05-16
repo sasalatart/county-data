@@ -1,7 +1,11 @@
 import { reset, change } from 'redux-form';
 import _ from 'lodash';
-import { GET_COUNTY } from '../reducer/currentCounty';
 import { getCounty } from '../../api';
+
+import {
+  SET_COUNTY,
+  SET_CURRENT_COUNTY_LOADING
+} from '../reducer/currentCounty';
 
 const countyFormReset = (county, subjectForm) => dispatch => {
   if (!_.get(subjectForm, 'values')) {
@@ -32,12 +36,25 @@ export const countyFormResetOnSubjectChange = (newSubject, previousSubject, sele
   }
 };
 
+const setCounty = county => {
+  return {
+    type: SET_COUNTY,
+    county
+  };
+};
+
+const setLoading = loading => {
+  return {
+    type: SET_CURRENT_COUNTY_LOADING,
+    loading
+  };
+};
+
 export const fetchCounty = (id, subjectForm) => dispatch => {
+  dispatch(setLoading(true));
   getCounty(id).then(county => {
+    dispatch(setCounty(county));
     dispatch(countyFormReset(county, subjectForm));
-    dispatch({
-      type: GET_COUNTY,
-      county
-    });
+    dispatch(setLoading(false));
   });
 };

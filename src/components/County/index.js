@@ -5,6 +5,7 @@ import _ from 'lodash';
 import Header from './Header';
 import SubjectForm from './SubjectForm';
 import IndicatorForm from './IndicatorForm';
+import Spinner from '../Spinner';
 
 const County = ({
   currentCounty,
@@ -14,25 +15,25 @@ const County = ({
 }) => {
   currentCounty.statistics = _.omitBy(currentCounty.statistics, _.isEmpty);
 
-  return(
-    <Col sm={12}>
-      <Header />
+  return currentCounty.loading ?
+  <Spinner size={256} /> :
+  <Col sm={12}>
+    <Header />
 
-      <SubjectForm
+    <SubjectForm
+      availableSubjects={currentCounty.statistics}
+      selectedSubject={selectedSubject}
+      selectedYear={selectedYear}
+      selectedIndicator={selectedIndicator} />
+
+    {
+      selectedSubject && selectedYear &&
+      <IndicatorForm
         availableSubjects={currentCounty.statistics}
         selectedSubject={selectedSubject}
-        selectedYear={selectedYear}
         selectedIndicator={selectedIndicator} />
-
-      {
-        selectedSubject && selectedYear &&
-        <IndicatorForm
-          availableSubjects={currentCounty.statistics}
-          selectedSubject={selectedSubject}
-          selectedIndicator={selectedIndicator} />
-      }
-    </Col>
-  );
+    }
+  </Col>;
 };
 
 const mapState = ({ currentCounty, form: { subject, indicator } }) => {

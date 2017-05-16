@@ -4,31 +4,48 @@ import { findCountiesByName } from '../../api';
 import { watchingValues } from '../reducer/watching';
 
 import {
-  SET_SEARCH_PAGE,
-  SET_SEARCH_PAGE_COUNTIES,
+  SET_SEARCHED_PAGE,
+  SET_SEARCHED_COUNTIES,
+  SET_SEARCHED_COUNTIES_LOADING,
   CLEAR_COUNTY_SEARCH
 } from '../reducer/searchedCounties';
+
+const setSearchedPage = page => {
+  return {
+    type: SET_SEARCHED_PAGE,
+    currentPage: page
+  };
+};
+
+const setLoading = loading => {
+  return {
+    type: SET_SEARCHED_COUNTIES_LOADING,
+    loading
+  };
+};
+
+const setSearchedCounties = ({ currentPage, pages, counties }) => {
+  return {
+    type: SET_SEARCHED_COUNTIES,
+    currentPage,
+    pages,
+    counties
+  };
+};
 
 export const searchByName = (page, name) => (dispatch) => {
   if (name.length === 0) {
     return;
   }
 
-  findCountiesByName(page, name).then(({ currentPage, pages, counties }) => {
-    dispatch({
-      type: SET_SEARCH_PAGE_COUNTIES,
-      currentPage,
-      pages,
-      counties
-    });
+  dispatch(setLoading(true));
+  findCountiesByName(page, name).then(response => {
+    dispatch(setSearchedCounties(response));
+    dispatch(setLoading(false));
   });
 
+  dispatch(setSearchedPage(page));
   dispatch(changeWatching(watchingValues.search));
-
-  dispatch({
-    type: SET_SEARCH_PAGE,
-    currentPage: page
-  });
 };
 
 export const clearCountySearch = () => dispatch => {
