@@ -1,48 +1,45 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Jumbotron } from 'react-bootstrap';
 import _ from 'lodash';
 import SubjectForm from './SubjectForm';
 import IndicatorForm from './IndicatorForm';
 
-class County extends Component {
-  render() {
-    const { county, selectedSubject, selectedYear, selectedIndicator, subjectJSONArray } = this.props;
-    county.statistics = _.omitBy(county.statistics, _.isEmpty);
+const County = ({ currentCounty, selectedSubject, selectedYear, selectedIndicator }) => {
+  currentCounty.statistics = _.omitBy(currentCounty.statistics, _.isEmpty);
 
-    return(
-      <Col sm={12}>
-        <Jumbotron>
-          <h1>{ county.name }</h1>
-          <h3>{ county.state }</h3>
-        </Jumbotron>
+  return(
+    <Col sm={12}>
+      <Jumbotron>
+        <h1>{ currentCounty.name }</h1>
+        <h3>{ currentCounty.state }</h3>
+      </Jumbotron>
 
-        <SubjectForm
+      <SubjectForm
+        selectedSubject={selectedSubject}
+        selectedYear={selectedYear}
+        selectedIndicator={selectedIndicator}
+        currentCounty={currentCounty} />
+
+      {
+        selectedSubject && selectedYear &&
+        <IndicatorForm
           selectedSubject={selectedSubject}
-          selectedYear={selectedYear}
-          subjects={county.statistics}
-          subjectJSONArray={subjectJSONArray} />
-
-        {
-          selectedSubject && selectedYear &&
-          <IndicatorForm
-            indicators={Object.keys(subjectJSONArray[0])}
-            selectedIndicator={selectedIndicator}
-            subjectJSONArray={subjectJSONArray} />
-        }
-      </Col>
-    );
-  }
-}
+          selectedIndicator={selectedIndicator}
+          currentCounty={currentCounty} />
+      }
+    </Col>
+  );
+};
 
 const mapState = ({ currentCounty, form: { subject, indicator } }) => {
   const selectedSubject = _.get(subject, 'values.name');
 
   return {
+    currentCounty,
     selectedSubject,
     selectedYear: _.get(subject, 'values.year'),
-    selectedIndicator: _.get(indicator, 'values.stat'),
-    subjectJSONArray: _.get(currentCounty.statistics, `${selectedSubject}`, [])
+    selectedIndicator: _.get(indicator, 'values.stat')
   };
 };
 

@@ -9,5 +9,6 @@ export {
 } from './search';
 
 export {
-  fetchCounty
+  fetchCounty,
+  countyFormResetOnSubjectChange
 } from './currentCounty';
