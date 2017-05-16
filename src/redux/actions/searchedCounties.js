@@ -7,7 +7,7 @@ import {
   SET_SEARCH_PAGE,
   SET_SEARCH_PAGE_COUNTIES,
   CLEAR_COUNTY_SEARCH
-} from '../reducer/search';
+} from '../reducer/searchedCounties';
 
 export const searchByName = (page, name) => (dispatch) => {
   if (name.length === 0) {

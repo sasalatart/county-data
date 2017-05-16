@@ -28,10 +28,10 @@ const Header = ({
   );
 };
 
-const mapState = ({ currentCounty, favourites }) => {
+const mapState = ({ currentCounty, favouriteCounties }) => {
   return {
     currentCounty,
-    favouriteIds: favourites.counties.map(({ _id }) => _id)
+    favouriteIds: favouriteCounties.counties.map(({ _id }) => _id)
   };
 };
 const mapDispatch = { addToFavourites, removeFromFavourites };

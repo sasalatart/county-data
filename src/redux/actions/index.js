@@ -6,7 +6,7 @@ export {
 export {
   searchByName,
   clearCountySearch
-} from './search';
+} from './searchedCounties';
 
 export {
   fetchCounty,
@@ -16,4 +16,4 @@ export {
 export {
   addToFavourites,
   removeFromFavourites
-} from './favourites';
+} from './favouriteCounties';

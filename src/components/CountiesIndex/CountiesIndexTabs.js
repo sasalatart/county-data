@@ -31,11 +31,11 @@ const CountiesIndexTabs = ({
   );
 };
 
-const mapState = ({ allCounties, search, favourites }) => {
+const mapState = ({ allCounties, searchedCounties, favouriteCounties }) => {
   return {
     activeKey: allCounties.selected,
-    countiesFromFavourites: favourites.counties,
-    countiesFromSearch: search.counties
+    countiesFromFavourites: favouriteCounties.counties,
+    countiesFromSearch: searchedCounties.counties
   };
 };
 const mapDispatch = { changeWatching };

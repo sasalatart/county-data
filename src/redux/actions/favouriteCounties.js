@@ -1,7 +1,7 @@
 import {
   ADD_COUNTY_TO_FAVOURITES,
   REMOVE_COUNTY_FROM_FAVOURITES
-} from '../reducer/favourites';
+} from '../reducer/favouriteCounties';
 
 export const addToFavourites = county => {
   const { _id, state, fipsCode, name } = county;

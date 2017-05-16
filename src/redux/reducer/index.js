@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
-import allCounties from './allCounties';
-import search from './search';
 import currentCounty from './currentCounty';
-import favourites from './favourites';
+import allCounties from './allCounties';
+import searchedCounties from './searchedCounties';
+import favouriteCounties from './favouriteCounties';
 
 export default combineReducers({
-  allCounties,
-  search,
   currentCounty,
-  favourites,
+  allCounties,
+  searchedCounties,
+  favouriteCounties,
   form
 });

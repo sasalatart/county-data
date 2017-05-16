@@ -1,4 +1,4 @@
-export const watchingValues = { all: 'all', fav: 'favourites', search: 'search' };
+export const watchingValues = { all: 'all', fav: 'fav', search: 'search' };
 export const CHANGE_WATCHING = 'CHANGE_WATCHING';
 export const SET_PAGE = 'SET_PAGE';
 export const SET_PAGE_COUNTIES = 'SET_PAGE_COUNTIES';
