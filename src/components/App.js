@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
-import CountiesIndex from './CountiesIndex';
+import CountiesIndexTabs from './CountiesIndex/CountiesIndexTabs';
+import CountiesList from './CountiesIndex/CountiesList';
 import County from './County';
 import Navbar from './Navbar';
 import { fetchAllCounties } from '../redux/actions';
@@ -19,8 +20,16 @@ class App extends Component {
         <Navbar />
         <div className="container">
           <Row>
-            <Col sm={4}><CountiesIndex /></Col>
-            { this.props.currentCounty._id && <Col sm={8}><County /></Col> }
+            <Col sm={4}>
+              <CountiesIndexTabs />
+              <CountiesList />
+            </Col>
+            {
+              this.props.currentCounty._id &&
+              <Col sm={8}>
+                <County />
+              </Col>
+            }
           </Row>
         </div>
       </div>
