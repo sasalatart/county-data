@@ -1,35 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListGroup } from 'react-bootstrap';
 import _ from 'lodash';
 import CountiesPaginator from './CountiesPaginator';
 import { fetchAllCounties, searchByName, fetchCounty } from '../../redux/actions';
 import { watchingValues } from '../../redux/reducer/allCounties';
-import { buildGroupItems } from '../../utils';
+import { buildListGroup } from '../../utils';
 
 class CountiesList extends Component {
   tabWatched() {
-    const allCounties = {
-      ...this.props.allCounties,
-      fetchFunction: this.props.fetchAllCounties
-    };
+    const { allCounties, fetchAllCounties, favourites, search, searchByName, searchName } = this.props;
 
-    const search = {
-      ...this.props.search,
-      fetchFunction: this.props.searchByName,
-      countyName: this.props.searchName
-    };
-
-    return allCounties.selected === watchingValues.all ? allCounties : search;
+    if (allCounties.selected === watchingValues.all) {
+      return { ...allCounties, fetchFunction: fetchAllCounties };
+    } else if (allCounties.selected === watchingValues.fav) {
+      return { counties: favourites.counties };
+    } else {
+      return { ...search, fetchFunction: searchByName, countyName: searchName };
+    }
   }
 
   properDisplay(counties) {
     if (counties.length > 0) {
-      return(
-        <ListGroup>
-          { buildGroupItems(counties, this.handleCountyClick.bind(this), this.props.currentCounty) }
-        </ListGroup>
-      );
+      return buildListGroup(counties, this.handleCountyClick.bind(this), this.props.currentCountyId);
     } else {
       return <h3>There are no counties available.</h3>;
     }
@@ -44,9 +36,9 @@ class CountiesList extends Component {
 
     return(
       <div>
-        { tabWatched.pages > 1 && <CountiesPaginator { ...tabWatched } /> }
-        { this.properDisplay.bind(this)(tabWatched.counties) }
-        { tabWatched.pages > 1 && <CountiesPaginator { ...tabWatched } /> }
+      { tabWatched.pages > 1 ? <CountiesPaginator { ...tabWatched } /> : <hr /> }
+      { this.properDisplay.bind(this)(tabWatched.counties) }
+      { tabWatched.pages > 1 ? <CountiesPaginator { ...tabWatched } /> : <hr /> }
       </div>
     );
   }
@@ -56,11 +48,13 @@ const mapState = ({
   allCounties,
   currentCounty,
   search,
+  favourites,
   form: { countySearch, subject }}) => {
   return {
     allCounties,
-    currentCounty,
+    currentCountyId: currentCounty._id,
     search,
+    favourites,
     searchName: _.get(countySearch, 'values.name'),
     subjectForm: subject
   };

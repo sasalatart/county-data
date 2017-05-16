@@ -1,22 +1,24 @@
 import React from 'react';
-import { ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import _ from 'lodash';
 import decamelize from 'decamelize';
 
 export const WELL_PADDING = 20;
 
-export const buildGroupItems = (counties, onCountyClick, currentCounty) => {
-  return counties.map(county => {
+export const buildListGroup = (counties, onCountyClick, currentCountyId) => {
+  const items = counties.map(county => {
+    const displayName = `${county.name} (${county.state})`;
     return(
       <ListGroupItem
         key={county._id}
-        header={county.name}
         onClick={() => onCountyClick(county._id)}
-        active={county._id === _.get(currentCounty, '_id')}>
-        {county.state}
+        active={county._id === currentCountyId}>
+        {displayName}
       </ListGroupItem>
     );
   });
+
+  return <ListGroup>{items}</ListGroup>;
 };
 
 export const buildSubjectOptions = (subjects, selected) => {
