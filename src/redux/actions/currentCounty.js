@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import { reset, change } from 'redux-form';
+import { reset } from 'redux-form';
 import _ from 'lodash';
 import { getCounty } from '../../api';
 
@@ -7,35 +7,6 @@ import {
   SET_COUNTY,
   SET_CURRENT_COUNTY_LOADING
 } from '../reducer/currentCounty';
-
-const countyFormReset = (county, subjectForm) => dispatch => {
-  if (!_.get(subjectForm, 'values')) {
-    return;
-  }
-
-  const selectedSubject = _.get(subjectForm, 'values.name');
-  const selectedYear = _.get(subjectForm, 'values.year');
-  const subjectInCounty = _.get(county.statistics, selectedSubject, []);
-
-  const hasSelectedSubject = subjectInCounty !== [];
-  const hasSelectedYear = _.includes(subjectInCounty.map(({ year }) => year), parseInt(selectedYear, 10));
-
-  if (!hasSelectedSubject || !hasSelectedYear) {
-    dispatch(reset('subject'));
-    dispatch(reset('indicator'));
-  }
-};
-
-export const countyFormResetOnSubjectChange = (newSubject, previousSubject, selectedYear, selectedIndicator) => dispatch => {
-  if (!_.has(newSubject[0], selectedIndicator)) {
-    dispatch(reset('indicator'));
-  }
-
-  const availableYears = newSubject.map(({ year }) => year);
-  if (!_.includes(availableYears, parseInt(selectedYear, 10))) {
-    dispatch(change('subject', 'year', availableYears[0]));
-  }
-};
 
 const setCounty = county => {
   return {
@@ -51,6 +22,20 @@ const setLoading = loading => {
   };
 };
 
+const countyFormResetOnNewCounty = (county, subjectForm) => dispatch => {
+  const selectedSubject = _.get(subjectForm, 'values.name');
+  const selectedYear = _.get(subjectForm, 'values.year');
+  const subjectInCounty = _.get(county.statistics, selectedSubject, []);
+
+  const hasSelectedSubject = subjectInCounty !== [];
+  const hasSelectedYear = _.includes(subjectInCounty.map(({ year }) => year), parseInt(selectedYear, 10));
+
+  if (!hasSelectedSubject || !hasSelectedYear) {
+    dispatch(reset('subject'));
+    dispatch(reset('indicator'));
+  }
+};
+
 export const fetchCounty = id => (dispatch, getState) => {
   const subjectForm = _.get(getState(), 'form.subject');
 
@@ -59,6 +44,6 @@ export const fetchCounty = id => (dispatch, getState) => {
     dispatch(setCounty(county));
     dispatch(push(`/counties/${county._id}`));
     dispatch(setLoading(false));
-    dispatch(countyFormReset(county, subjectForm));
+    dispatch(countyFormResetOnNewCounty(county, subjectForm));
   });
 };

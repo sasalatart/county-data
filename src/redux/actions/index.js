@@ -1,6 +1,5 @@
 export {
-  fetchCounty,
-  countyFormResetOnSubjectChange
+  fetchCounty
 } from './currentCounty';
 
 export {

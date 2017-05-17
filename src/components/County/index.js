@@ -7,6 +7,7 @@ import SubjectForm from './SubjectForm';
 import IndicatorForm from './IndicatorForm';
 import Spinner from '../Spinner';
 import { addToFavourites, removeFromFavourites } from '../../redux/actions';
+import { randomElement } from '../../utils';
 
 const County = ({
   currentCounty,
@@ -17,7 +18,11 @@ const County = ({
   addToFavourites,
   removeFromFavourites
 }) => {
-  currentCounty.statistics = _.omitBy(currentCounty.statistics, _.isEmpty);
+  const availableSubjects = _.omitBy(currentCounty.statistics, _.isEmpty);
+
+  if (!availableSubjects[selectedSubject]) {
+    selectedSubject = randomElement(availableSubjects);
+  }
 
   return (
     <Col sm={12}>
@@ -30,7 +35,7 @@ const County = ({
         removeFromFavourites={removeFromFavourites} />
 
       <SubjectForm
-        availableSubjects={currentCounty.statistics}
+        availableSubjects={availableSubjects}
         selectedSubject={selectedSubject}
         selectedYear={selectedYear}
         selectedIndicator={selectedIndicator} />
@@ -38,7 +43,7 @@ const County = ({
       {
         selectedSubject && selectedYear &&
         <IndicatorForm
-          availableSubjects={currentCounty.statistics}
+          availableSubjects={availableSubjects}
           selectedSubject={selectedSubject}
           selectedIndicator={selectedIndicator} />
       }

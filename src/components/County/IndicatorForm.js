@@ -4,7 +4,7 @@ import Measure from 'react-measure';
 import { Field, reduxForm } from 'redux-form';
 import { Well, FormGroup, ControlLabel } from 'react-bootstrap';
 import IndicatorGraph from './IndicatorGraph';
-import { buildIndicatorOptions, WELL_PADDING } from '../../utils';
+import { buildIndicatorOptions, buildGraphData, WELL_PADDING } from '../../utils';
 
 class IndicatorForm extends Component {
   state = { graphHeight: 0, graphWidth: 0 };
@@ -22,12 +22,6 @@ class IndicatorForm extends Component {
 
     const indicators = Object.keys(availableSubjects[selectedSubject][0]);
 
-    const data = availableSubjects[selectedSubject].map(yearData => {
-      const json = { year: yearData.year };
-      json[selectedIndicator] = yearData[selectedIndicator];
-      return json;
-    });
-
     return(
       <Measure onMeasure={this.onMeasureHandler.bind(this)}>
         <Well style={ { padding: WELL_PADDING } }>
@@ -43,7 +37,7 @@ class IndicatorForm extends Component {
           {
             selectedIndicator &&
             <IndicatorGraph
-              data={data}
+              data={buildGraphData(availableSubjects[selectedSubject], selectedIndicator)}
               height={graphHeight}
               width={graphWidth}
               yDataKey={selectedIndicator} />

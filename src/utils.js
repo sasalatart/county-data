@@ -48,3 +48,34 @@ export const buildIndicatorOptions = (indicators, selected) => {
 
   return options;
 };
+
+export const buildTableData = (subjectArray, selectedYear) => {
+  const data = _.find(subjectArray, o => o.year === parseInt(selectedYear, 10)) || {};
+  delete data._id;
+  return data;
+};
+
+export const buildGraphData = (subjectArray, selectedIndicator) => {
+  return subjectArray.map(yearData => {
+    const json = { year: yearData.year };
+    json[selectedIndicator] = yearData[selectedIndicator];
+    return json;
+  });
+};
+
+export const randomElement = array => {
+  return array[Math.floor(Math.random() * array.length)];
+};
+
+export const countyFormResetOnSubjectChange = (newSubject, selectedYear, change) => {
+  const availableYears = newSubject.map(({ year }) => year);
+  if (!_.includes(availableYears, parseInt(selectedYear, 10))) {
+    change('subject', 'year', availableYears[0]);
+  }
+};
+
+export const indicatorFormResetOnSubjectChange = (newSubject, selectedIndicator, reset) => {
+  if (!_.has(newSubject[0], selectedIndicator)) {
+    reset('indicator');
+  }
+};
