@@ -12,8 +12,6 @@
 
 This is an application built with [ExpressJS](https://expressjs.com/) and [React/Redux](https://facebook.github.io/react/) that presents County Data Indicators regarding diabetes collected by the [CDC](https://www.cdc.gov/diabetes/data/countydata/countydataindicators.html) between 2004 and 2013.
 
-Currently available at https://countydata.salatart.com
-
 ## API Usage
 
 #### Counties Index
@@ -153,7 +151,7 @@ Returns the specified county.
 
 1. Clone and cd into this repository
 2. run `npm install` (or `yarn install`)
-3. Export the environment variables `MONGODB_HOST` and `MONGODB_PORT` (27017 by default).
+3. Export the environment variables `MONGODB_HOST` and `MONGODB_PORT` (27017 by default), or alternatively `MONGODB_URI`.
 4. Turn on your local mongodb server if that is the case.
 5. run `nodemon server/index.js` (turns on the backend server)
 6. run `npm run startDev` (turns on the frontend development server)
