@@ -34,7 +34,8 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "start": "react-scripts build && node server/index.js",
+    "start": "node server/index.js",
+    "postinstall": "react-scripts build",
     "seed": "node server/db/seeds.js",
     "startDev": "react-scripts start",
     "build": "react-scripts build",
