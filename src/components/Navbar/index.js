@@ -6,7 +6,7 @@ const AppNavbar = () => {
   return(
     <Navbar>
       <Navbar.Header>
-        <Navbar.Brand><a href="#">County Data App</a></Navbar.Brand>
+        <Navbar.Brand><a href="#">County Data</a></Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
